@@ -4,13 +4,17 @@ import (
 	"errors"
 	"os"
 
-	"github.com/go-template-boilerplate/cmd/models"
+	"github.com/go_geofetch/cmd/models"
 )
 
 func EnvConfig() (models.EnvModel, error) {
-	databaseUrl := os.Getenv("DATABASE_URL")
 	jwtSecret := os.Getenv("JWT_SECRET")
 	port := os.Getenv("PORT")
+	postgresUser := os.Getenv("POSTGRES_USER")
+	postgresPassword := os.Getenv("POSTGRES_PASSWORD")
+	postgresDB := os.Getenv("POSTGRES_DB")
+	databaseUrl := os.Getenv("DATABASE_URL")
+
 	if databaseUrl == "" {
 		return models.EnvModel{}, errors.New("DATABASE_URL is not set")
 	}
@@ -20,11 +24,23 @@ func EnvConfig() (models.EnvModel, error) {
 	if port == "" {
 		return models.EnvModel{}, errors.New("PORT is not set")
 	}
+	if postgresUser == "" {
+		return models.EnvModel{}, errors.New("POSTGRES_USER is not set")
+	}
+	if postgresPassword == "" {
+		return models.EnvModel{}, errors.New("POSTGRES_PASSWORD is not set")
+	}
+	if postgresDB == "" {
+		return models.EnvModel{}, errors.New("POSTGRES_DB is not set")
+	}
 
 	model := models.EnvModel{
-		DatabaseUrl: databaseUrl,
-		JwtSecret:   jwtSecret,
-		Port:        port,
+		DatabaseUrl:      databaseUrl,
+		JwtSecret:        jwtSecret,
+		Port:             port,
+		PostgresUser:     postgresUser,
+		PostgresPassword: postgresPassword,
+		PostgresDB:       postgresDB,
 	}
 
 	return model, nil
