@@ -18,6 +18,6 @@ RUN go build
 
 
 EXPOSE 4000
-CMD ["go run", "main.go"]
+CMD ["./main"]
 
 
