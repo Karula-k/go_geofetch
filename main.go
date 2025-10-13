@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/go-template-boilerplate/cmd/config"
-	"github.com/go-template-boilerplate/cmd/routes"
-	"github.com/go-template-boilerplate/db"
-	_ "github.com/go-template-boilerplate/docs"
+	"github.com/go_geofetch/cmd/config"
+	"github.com/go_geofetch/cmd/routes"
+	"github.com/go_geofetch/db"
+	_ "github.com/go_geofetch/docs"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -27,7 +27,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	conn, queries, err := db.InitDB(ctx)
+	conn, queries, err := db.InitDB(ctx, &env)
 	if err != nil {
 		log.Fatal(err)
 	}

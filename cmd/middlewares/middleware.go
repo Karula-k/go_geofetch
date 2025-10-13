@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"github.com/go-template-boilerplate/cmd/models"
+	"github.com/go_geofetch/cmd/models"
 	"github.com/gofiber/fiber/v2"
 )
 

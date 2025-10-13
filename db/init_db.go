@@ -3,20 +3,14 @@ package db
 import (
 	"context"
 	"fmt"
-	"os"
 
-	"github.com/go-template-boilerplate/generated"
+	"github.com/go_geofetch/cmd/models"
+	"github.com/go_geofetch/generated"
 	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
 )
 
-func InitDB(ctx context.Context) (*pgx.Conn, *generated.Queries, error) {
-	err := godotenv.Load(".env")
-	if err != nil {
-		return nil, nil, fmt.Errorf("error loading .env files %w", err)
-	}
-	DATABASE_URL := os.Getenv("DATABASE_URL")
-	conn, err := pgx.Connect(ctx, DATABASE_URL)
+func InitDB(ctx context.Context, env *models.EnvModel) (*pgx.Conn, *generated.Queries, error) {
+	conn, err := pgx.Connect(ctx, env.DatabaseUrl)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to connect to database: %w", err)
 	}

@@ -3,10 +3,10 @@ package controllers
 import (
 	"context"
 
-	"github.com/go-template-boilerplate/cmd/middlewares"
-	"github.com/go-template-boilerplate/cmd/models"
-	"github.com/go-template-boilerplate/cmd/utils"
-	"github.com/go-template-boilerplate/generated"
+	"github.com/go_geofetch/cmd/middlewares"
+	"github.com/go_geofetch/cmd/models"
+	"github.com/go_geofetch/cmd/utils"
+	"github.com/go_geofetch/generated"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )
