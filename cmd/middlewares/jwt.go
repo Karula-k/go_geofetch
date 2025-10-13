@@ -4,8 +4,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/go-template-boilerplate/cmd/models"
-	"github.com/go-template-boilerplate/generated"
+	"github.com/go_geofetch/cmd/models"
+	"github.com/go_geofetch/generated"
 	"github.com/golang-jwt/jwt/v5"
 )
 

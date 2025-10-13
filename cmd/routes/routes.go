@@ -3,10 +3,10 @@ package routes
 import (
 	"context"
 
-	"github.com/go-template-boilerplate/cmd/controllers"
-	"github.com/go-template-boilerplate/cmd/middlewares"
-	"github.com/go-template-boilerplate/cmd/models"
-	"github.com/go-template-boilerplate/generated"
+	"github.com/go_geofetch/cmd/controllers"
+	"github.com/go_geofetch/cmd/middlewares"
+	"github.com/go_geofetch/cmd/models"
+	"github.com/go_geofetch/generated"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/swagger"
 )
