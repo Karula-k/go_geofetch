@@ -6,8 +6,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      mosquitto
-      rabbitmq
+      mosquitto:
+      rabbitmq:
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       NODE_ENV: ${NODE_ENV}
@@ -35,7 +35,7 @@ services:
 
   mosquitto:
     image: eclipse-mosquitto:latest
-    container_name: mosquittoz
+    container_name: mosquitto
     restart: always
     ports:
       - "1883:1883"
@@ -55,7 +55,7 @@ services:
       - 5672:5672
       - 15672:15672
     environment:
-      RABBITMQ_DEFAULT_USER:  ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     configs:
       - source: rabbitmq-plugins
@@ -63,5 +63,3 @@ services:
     volumes:
       - rabbitmq-lib:/var/lib/rabbitmq/
       - rabbitmq-log:/var/log/rabbitmq
-volumes:
-  rabbitmq_data:
