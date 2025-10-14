@@ -24,12 +24,15 @@ func MQTTSubscription(ctx context.Context, queries *generated.Queries, env *mode
 			return
 		}
 
-		queries.CreateVehicleLocation(ctx, generated.CreateVehicleLocationParams{
+		_, err = queries.CreateVehicleLocation(ctx, generated.CreateVehicleLocationParams{
 			VehicleID: vehicleLocation.VehicleID,
 			Latitude:  vehicleLocation.Latitude,
 			Longitude: vehicleLocation.Longitude,
 			Timestamp: vehicleLocation.Timestamp,
 		})
+		if err != nil {
+			fmt.Println("Error creating vehicle location:", err, vehicleLocation)
+		}
 		fmt.Printf("Received message on topic %s: %+v\n", msg.Topic(), vehicleLocation)
 	}); token.Wait() && token.Error() != nil {
 		fmt.Println("Subscription error:", token.Error())
