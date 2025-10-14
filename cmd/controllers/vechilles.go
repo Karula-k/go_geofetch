@@ -71,7 +71,7 @@ func LastLocationController(ctx context.Context, queries *generated.Queries) fib
 		if vehicleID == "" {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "vehicle_id is required"})
 		}
-		location, err := queries.GetLatestVehicleLocation(ctx, vehicleID)
+		location, err := queries.GetVehicleLocation(ctx, vehicleID)
 		if err != nil {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"error":      "location not found",
