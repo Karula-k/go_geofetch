@@ -1,0 +1,1 @@
+ALTER TABLE vehicle_location ADD CONSTRAINT vehicle_location_vehicle_id_key UNIQUE (vehicle_id);

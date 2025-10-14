@@ -111,9 +111,142 @@
                     }
                 }
             }
+        },
+        "/vehicles/dummy": {
+            "post": {
+                "description": "Receives a request, creates a dummy vehicle location, and publishes it to MQTT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Simulate vehicle location update",
+                "parameters": [
+                    {
+                        "description": "Dummy vehicle location data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.VehiclesDummyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vehicle location published",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/vehicles/{vehicle_id}/history": {
+            "get": {
+                "description": "Queries the database for the location history of a vehicle",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Retrieve vehicle location history",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Vehicle ID",
+                        "name": "vehicle_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Start timestamp (Unix timestamp)",
+                        "name": "start",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "End timestamp (Unix timestamp)",
+                        "name": "end",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/generated.VehicleLocation"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vehicles/{vehicle_id}/location": {
+            "get": {
+                "description": "Queries the database for the latest location of a vehicle",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Retrieve latest vehicle location",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Vehicle ID",
+                        "name": "vehicle_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/generated.VehicleLocation"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "generated.VehicleLocation": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "timestamp": {
+                    "type": "integer"
+                },
+                "vehicle_id": {
+                    "type": "string"
+                }
+            }
+        },
         "models.LoginRequest": {
             "type": "object",
             "required": [
@@ -153,6 +286,14 @@
                 "password": {
                     "type": "string",
                     "x-order": "1"
+                }
+            }
+        },
+        "models.VehiclesDummyRequest": {
+            "type": "object",
+            "properties": {
+                "vehicle_id": {
+                    "type": "string"
                 }
             }
         }

@@ -1,4 +1,17 @@
 definitions:
+  generated.VehicleLocation:
+    properties:
+      id:
+        type: integer
+      latitude:
+        type: number
+      longitude:
+        type: number
+      timestamp:
+        type: integer
+      vehicle_id:
+        type: string
+    type: object
   models.LoginRequest:
     properties:
       password:
@@ -27,6 +40,11 @@ definitions:
     required:
     - password
     - username
+    type: object
+  models.VehiclesDummyRequest:
+    properties:
+      vehicle_id:
+        type: string
     type: object
 info:
   contact: {}
@@ -103,4 +121,79 @@ paths:
       summary: register
       tags:
       - Auth
+  /vehicles/{vehicle_id}/history:
+    get:
+      consumes:
+      - application/json
+      description: Queries the database for the location history of a vehicle
+      parameters:
+      - description: Vehicle ID
+        in: path
+        name: vehicle_id
+        required: true
+        type: string
+      - description: Start timestamp (Unix timestamp)
+        in: query
+        name: start
+        type: integer
+      - description: End timestamp (Unix timestamp)
+        in: query
+        name: end
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/generated.VehicleLocation'
+            type: array
+      summary: Retrieve vehicle location history
+      tags:
+      - Vehicle
+  /vehicles/{vehicle_id}/location:
+    get:
+      consumes:
+      - application/json
+      description: Queries the database for the latest location of a vehicle
+      parameters:
+      - description: Vehicle ID
+        in: path
+        name: vehicle_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/generated.VehicleLocation'
+      summary: Retrieve latest vehicle location
+      tags:
+      - Vehicle
+  /vehicles/dummy:
+    post:
+      consumes:
+      - application/json
+      description: Receives a request, creates a dummy vehicle location, and publishes
+        it to MQTT
+      parameters:
+      - description: Dummy vehicle location data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.VehiclesDummyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Vehicle location published
+          schema:
+            type: string
+      summary: Simulate vehicle location update
+      tags:
+      - Vehicle
 swagger: "2.0"

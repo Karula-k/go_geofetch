@@ -1,0 +1,1 @@
+ALTER TABLE vehicle_location DROP CONSTRAINT vehicle_location_vehicle_id_key;

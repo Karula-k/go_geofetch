@@ -14,6 +14,8 @@ func EnvConfig() (models.EnvModel, error) {
 	postgresPassword := os.Getenv("POSTGRES_PASSWORD")
 	postgresDB := os.Getenv("POSTGRES_DB")
 	databaseUrl := os.Getenv("DATABASE_URL")
+	mqttBroker := os.Getenv("MQTT_BROKER")
+	mqttClientID := os.Getenv("MQTT_CLIENT_ID")
 
 	if databaseUrl == "" {
 		return models.EnvModel{}, errors.New("DATABASE_URL is not set")
@@ -33,11 +35,19 @@ func EnvConfig() (models.EnvModel, error) {
 	if postgresDB == "" {
 		return models.EnvModel{}, errors.New("POSTGRES_DB is not set")
 	}
+	if mqttBroker == "" {
+		return models.EnvModel{}, errors.New("MQTT_BROKER is not set")
+	}
+	if mqttClientID == "" {
+		return models.EnvModel{}, errors.New("MQTT_CLIENT_ID is not set")
+	}
 
 	model := models.EnvModel{
 		DatabaseUrl:      databaseUrl,
 		JwtSecret:        jwtSecret,
 		Port:             port,
+		MQTTBroker:       mqttBroker,
+		MQTTClientID:     mqttClientID,
 		PostgresUser:     postgresUser,
 		PostgresPassword: postgresPassword,
 		PostgresDB:       postgresDB,
