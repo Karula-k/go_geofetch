@@ -9,6 +9,8 @@ import (
 	"github.com/go_geofetch/cmd/routes"
 	"github.com/go_geofetch/db"
 	_ "github.com/go_geofetch/docs"
+	"github.com/go_geofetch/internal/mqtt"
+	"github.com/go_geofetch/internal/mqtt/subscriptions"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -33,6 +35,14 @@ func main() {
 	}
 	defer conn.Close(ctx)
 
+	// Initialize MQTT
+	mqttClient, err := mqtt.InitMQTT(&env)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	subscriptions.MQTTSubscription(ctx, queries, &env, mqttClient)
+
 	fmt.Println(`
 	 $$$$$$\   $$$$$$\         $$$$$$\  $$$$$$$\ $$$$$$\ 
 	$$  __$$\ $$  __$$\       $$  __$$\ $$  __$$\\_$$  _|
@@ -50,6 +60,6 @@ func main() {
 		AllowOrigins: "http://localhost:5173",
 		AllowHeaders: "Origin,Content-Type,Accept",
 	}))
-	routes.Routes(app, ctx, queries, &env)
+	routes.Routes(app, ctx, queries, &env, mqttClient)
 	startServer(app, ":"+env.Port)
 }
