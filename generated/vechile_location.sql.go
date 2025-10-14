@@ -57,26 +57,6 @@ func (q *Queries) DeleteVehicleLocation(ctx context.Context, id int64) error {
 	return err
 }
 
-const getLatestVehicleLocation = `-- name: GetLatestVehicleLocation :one
-SELECT id, vehicle_id, latitude, longitude, timestamp FROM vehicle_location
-WHERE vehicle_id = $1
-ORDER BY timestamp DESC
-LIMIT 1
-`
-
-func (q *Queries) GetLatestVehicleLocation(ctx context.Context, vehicleID string) (VehicleLocation, error) {
-	row := q.db.QueryRow(ctx, getLatestVehicleLocation, vehicleID)
-	var i VehicleLocation
-	err := row.Scan(
-		&i.ID,
-		&i.VehicleID,
-		&i.Latitude,
-		&i.Longitude,
-		&i.Timestamp,
-	)
-	return i, err
-}
-
 const getVehicleHistory = `-- name: GetVehicleHistory :many
 SELECT id, vehicle_id, latitude, longitude, timestamp FROM vehicle_location
 WHERE vehicle_id = $1
@@ -119,11 +99,13 @@ func (q *Queries) GetVehicleHistory(ctx context.Context, arg GetVehicleHistoryPa
 
 const getVehicleLocation = `-- name: GetVehicleLocation :one
 SELECT id, vehicle_id, latitude, longitude, timestamp FROM vehicle_location
-WHERE id = $1 LIMIT 1
+WHERE vehicle_id = $1
+ORDER BY timestamp DESC
+LIMIT 1
 `
 
-func (q *Queries) GetVehicleLocation(ctx context.Context, id int64) (VehicleLocation, error) {
-	row := q.db.QueryRow(ctx, getVehicleLocation, id)
+func (q *Queries) GetVehicleLocation(ctx context.Context, vehicleID string) (VehicleLocation, error) {
+	row := q.db.QueryRow(ctx, getVehicleLocation, vehicleID)
 	var i VehicleLocation
 	err := row.Scan(
 		&i.ID,

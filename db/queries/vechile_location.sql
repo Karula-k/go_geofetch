@@ -1,7 +1,3 @@
--- name: GetVehicleLocation :one
-SELECT * FROM vehicle_location
-WHERE id = $1 LIMIT 1;
-
 -- name: ListVehicleLocation :many
 SELECT * FROM vehicle_location
 ORDER BY id
@@ -37,8 +33,7 @@ AND (sqlc.narg('start_date')::BIGINT IS NULL OR timestamp >= sqlc.narg('start_da
 AND (sqlc.narg('end_date')::BIGINT IS NULL OR timestamp <= sqlc.narg('end_date'))
 ORDER BY timestamp DESC;
 
-
--- name: GetLatestVehicleLocation :one
+-- name: GetVehicleLocation :one
 SELECT * FROM vehicle_location
 WHERE vehicle_id = $1
 ORDER BY timestamp DESC
