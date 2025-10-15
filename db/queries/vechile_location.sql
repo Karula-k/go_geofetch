@@ -36,5 +36,5 @@ ORDER BY timestamp DESC;
 -- name: GetVehicleLocation :one
 SELECT * FROM vehicle_location
 WHERE vehicle_id = $1
-ORDER BY timestamp DESC
+ORDER BY id DESC, timestamp DESC
 LIMIT 1;
