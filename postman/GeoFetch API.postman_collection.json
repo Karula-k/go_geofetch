@@ -1,0 +1,502 @@
+{
+	"info": {
+		"_postman_id": "4b35e617-f68a-49a8-b1b7-b6d8d7b4d004",
+		"name": "GeoFetch API",
+		"description": "This is an Geo Fetch and Geo Fencing for Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15816450"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"password\": \"string\",\n  \"username\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/auth/login",
+								"description": "Login by username and password"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"password\": \"string\",\n  \"username\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/auth/login"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "string"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "refresh_token",
+					"item": [
+						{
+							"name": "Refresh Token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"refreshToken\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/auth/refresh_token",
+								"description": "refresh token by body"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"refreshToken\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/auth/refresh_token"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "string"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "register",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"password\": \"string\",\n  \"username\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/auth/register",
+								"description": "register by username and password"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"password\": \"string\",\n  \"username\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/auth/register"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "string"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "vehicles",
+			"item": [
+				{
+					"name": "dummy",
+					"item": [
+						{
+							"name": "Simulate vehicle location update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"latitude\": 3488.68912496167,\n  \"longitude\": 2155.1219400478108,\n  \"timestamp\": 8182,\n  \"vehicle_id\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/vehicles/dummy",
+								"description": "Receives a request, creates a dummy vehicle location, and publishes it to MQTT"
+							},
+							"response": [
+								{
+									"name": "Vehicle location published",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"latitude\": 3488.68912496167,\n  \"longitude\": 2155.1219400478108,\n  \"timestamp\": 8182,\n  \"vehicle_id\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/vehicles/dummy"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "string"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "{vehicle_id}",
+					"item": [
+						{
+							"name": "history",
+							"item": [
+								{
+									"name": "Retrieve vehicle location history",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/vehicles/:vehicle_id/history?start=7837&end=7837",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"vehicles",
+												":vehicle_id",
+												"history"
+											],
+											"query": [
+												{
+													"key": "start",
+													"value": "7837",
+													"description": "Start timestamp (Unix timestamp)"
+												},
+												{
+													"key": "end",
+													"value": "7837",
+													"description": "End timestamp (Unix timestamp)"
+												}
+											],
+											"variable": [
+												{
+													"key": "vehicle_id",
+													"value": "string",
+													"description": "(Required) Vehicle ID"
+												}
+											]
+										},
+										"description": "Queries the database for the location history of a vehicle"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/vehicles/:vehicle_id/history?start=7837&end=7837",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"vehicles",
+														":vehicle_id",
+														"history"
+													],
+													"query": [
+														{
+															"key": "start",
+															"value": "7837",
+															"description": "Start timestamp (Unix timestamp)"
+														},
+														{
+															"key": "end",
+															"value": "7837",
+															"description": "End timestamp (Unix timestamp)"
+														}
+													],
+													"variable": [
+														{
+															"key": "vehicle_id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"id\": 7275,\n    \"latitude\": 9807.789238246982,\n    \"longitude\": 9926.478765776767,\n    \"timestamp\": 8461,\n    \"vehicle_id\": \"string\"\n  },\n  {\n    \"id\": 783,\n    \"latitude\": 1925.150886763578,\n    \"longitude\": 2124.951327902698,\n    \"timestamp\": 8084,\n    \"vehicle_id\": \"string\"\n  }\n]"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "location",
+							"item": [
+								{
+									"name": "Retrieve latest vehicle location",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/vehicles/:vehicle_id/location",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"vehicles",
+												":vehicle_id",
+												"location"
+											],
+											"variable": [
+												{
+													"key": "vehicle_id",
+													"value": "string",
+													"description": "(Required) Vehicle ID"
+												}
+											]
+										},
+										"description": "Queries the database for the latest location of a vehicle"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/vehicles/:vehicle_id/location",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"vehicles",
+														":vehicle_id",
+														"location"
+													],
+													"variable": [
+														{
+															"key": "vehicle_id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": 8591,\n  \"latitude\": 6245.623334727821,\n  \"longitude\": 1910.6208849333873,\n  \"timestamp\": 3503,\n  \"vehicle_id\": \"string\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
