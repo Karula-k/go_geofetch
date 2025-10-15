@@ -100,7 +100,7 @@ func (q *Queries) GetVehicleHistory(ctx context.Context, arg GetVehicleHistoryPa
 const getVehicleLocation = `-- name: GetVehicleLocation :one
 SELECT id, vehicle_id, latitude, longitude, timestamp FROM vehicle_location
 WHERE vehicle_id = $1
-ORDER BY timestamp DESC
+ORDER BY id DESC, timestamp DESC
 LIMIT 1
 `
 
