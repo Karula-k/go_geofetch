@@ -15,7 +15,7 @@ A MQTT and Rabbit MQ FIBER
 
 ## Postman
 
-ignore user route its used for project that use middleware, this project didnt use middleware yet
+ignore user route its used for project that use middleware, this project didn't use middleware yet
 
 ```
 cd postman
@@ -58,7 +58,7 @@ docker-compose up --build
 docker-compose up -d
 ```
 
-3. **Prerequire**
+3. **Prerequisite**
    migrate the database
 
 ```bash
