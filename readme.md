@@ -54,8 +54,7 @@ make new .env file using .env.example as reference
 2. **Build**
 
 ```bash
-docker-compose up --build
-docker-compose up -d
+docker-compose up --build -d
 ```
 
 3. **Prerequisite**
