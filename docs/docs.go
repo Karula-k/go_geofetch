@@ -138,7 +138,6 @@ const docTemplate = `{
                         "description": "Dummy vehicle location data",
                         "name": "request",
                         "in": "body",
-                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/models.VehiclesDummyRequest"
                         }
@@ -300,6 +299,15 @@ const docTemplate = `{
         "models.VehiclesDummyRequest": {
             "type": "object",
             "properties": {
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "timestamp": {
+                    "type": "integer"
+                },
                 "vehicle_id": {
                     "type": "string"
                 }
@@ -314,8 +322,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "Order Api",
-	Description:      "This is an Boilerplate for Backend",
+	Title:            "GeoFetch API",
+	Description:      "This is an Geo Fetch and Geo Fencing for Backend",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

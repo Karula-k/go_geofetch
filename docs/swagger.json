@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is an Boilerplate for Backend",
-        "title": "Order Api",
+        "description": "This is an Geo Fetch and Geo Fencing for Backend",
+        "title": "GeoFetch API",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {},
         "version": "1.0"
@@ -130,7 +130,6 @@
                         "description": "Dummy vehicle location data",
                         "name": "request",
                         "in": "body",
-                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/models.VehiclesDummyRequest"
                         }
@@ -292,6 +291,15 @@
         "models.VehiclesDummyRequest": {
             "type": "object",
             "properties": {
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "timestamp": {
+                    "type": "integer"
+                },
                 "vehicle_id": {
                     "type": "string"
                 }

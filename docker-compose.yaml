@@ -7,11 +7,16 @@ services:
       postgres:
         condition: service_healthy
       mosquitto:
+        condition: service_started
       rabbitmq:
+        condition: service_started
     environment:
-      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-      NODE_ENV: ${NODE_ENV}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       PORT: ${PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      MQTT_BROKER: ${MQTT_BROKER}
+      MQTT_CLIENT_ID: ${MQTT_CLIENT_ID}
+      RABBITMQ_URL: ${RABBITMQ_URL}
     env_file:
       - .env
     ports:
@@ -41,14 +46,12 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - ./mosquitto/config:/mosquitto/config
-      - ./mosquitto/data:/mosquitto/data
-      - ./mosquitto/log:/mosquitto/log
+      - ./musquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     environment:
       - TZ=Asia/Jakarta
 
   rabbitmq:
-    image: rabbitmq:latest
+    image: rabbitmq:3-management
     container_name: rabbitmq
     restart: always
     ports:
@@ -57,9 +60,10 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-    configs:
-      - source: rabbitmq-plugins
-        target: /etc/rabbitmq/enabled_plugins
+    env_file:
+      - .env
     volumes:
-      - rabbitmq-lib:/var/lib/rabbitmq/
-      - rabbitmq-log:/var/log/rabbitmq
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  rabbitmq_data:

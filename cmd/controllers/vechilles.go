@@ -21,7 +21,7 @@ import (
 //	@Tags			Vehicle
 //	@Accept			json
 //	@Produce		json
-//	@Param			request	body		models.VehiclesDummyRequest	true	"Dummy vehicle location data"
+//	@Param			request	body		models.VehiclesDummyRequest	false	"Dummy vehicle location data"
 //	@Success		200		{string}	string						"Vehicle location published"
 //	@Router			/vehicles/dummy [post]
 func DummyVehicleController(ctx context.Context, client mqtt.Client, env *models.EnvModel) fiber.Handler {
@@ -31,15 +31,27 @@ func DummyVehicleController(ctx context.Context, client mqtt.Client, env *models
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "invalid request body"})
 		}
 		vehicleID := "B1234XYZ"
+		Latitude := -6.2088
+		Longitude := 106.8456
+		Timestamp := int64(1715003456)
 		if req.VehicleID != nil {
 			vehicleID = *req.VehicleID
+		}
+		if req.Latitude != nil {
+			Latitude = *req.Latitude
+		}
+		if req.Longitude != nil {
+			Longitude = *req.Longitude
+		}
+		if req.Timestamp != nil {
+			Timestamp = *req.Timestamp
 		}
 
 		dummyLocation := models.VehicleLocationHelper{
 			VehicleID: vehicleID,
-			Latitude:  -6.2088,
-			Longitude: 106.8456,
-			Timestamp: 1715003456,
+			Latitude:  Latitude,
+			Longitude: Longitude,
+			Timestamp: Timestamp,
 		}
 
 		payload, err := json.Marshal(dummyLocation)

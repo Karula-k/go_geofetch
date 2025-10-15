@@ -56,3 +56,11 @@ make run
 - [ ] permission management
 
 - [x] env management
+
+# Reference
+
+```
+https://github.com/Pungyeon/go-rabbitmq-example/blob/master/README.md
+
+https://medium.com/@abdurrehman-520/unlock-the-power-of-geofencing-in-flutter-with-haversine-formula-21b8203b1a5
+```

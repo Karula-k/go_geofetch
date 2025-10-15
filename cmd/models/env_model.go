@@ -9,4 +9,5 @@ type EnvModel struct {
 	PostgresPassword string `json:"postgres_password"`
 	PostgresDB       string `json:"postgres_db"`
 	DatabaseUrl      string `json:"database_url"`
+	RabbitMQURL      string `json:"rabbitmq_url"`
 }

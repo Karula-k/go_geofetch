@@ -43,14 +43,20 @@ definitions:
     type: object
   models.VehiclesDummyRequest:
     properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+      timestamp:
+        type: integer
       vehicle_id:
         type: string
     type: object
 info:
   contact: {}
-  description: This is an Boilerplate for Backend
+  description: This is an Geo Fetch and Geo Fencing for Backend
   termsOfService: http://swagger.io/terms/
-  title: Order Api
+  title: GeoFetch API
   version: "1.0"
 paths:
   /auth/login:
@@ -183,7 +189,6 @@ paths:
       - description: Dummy vehicle location data
         in: body
         name: request
-        required: true
         schema:
           $ref: '#/definitions/models.VehiclesDummyRequest'
       produces:
