@@ -21,7 +21,7 @@ func (consumer *Consumer) setup() error {
 		return fmt.Errorf("failed to open channel: %w", err)
 	}
 	defer channel.Close()
-	
+
 	return helper.DeclareExchange(channel)
 }
 
@@ -66,12 +66,12 @@ func (consumer *Consumer) Listen() error {
 
 	msgs, err := ch.Consume(
 		q.Name, // queue
-		"",         // consumer
-		true,       // auto-ack
-		false,      // exclusive
-		false,      // no-local
-		false,      // no-wait
-		nil,        // args
+		"",     // consumer
+		true,   // auto-ack
+		false,  // exclusive
+		false,  // no-local
+		false,  // no-wait
+		nil,    // args
 	)
 	if err != nil {
 		return fmt.Errorf("failed to register consumer: %w", err)
@@ -84,6 +84,9 @@ func (consumer *Consumer) Listen() error {
 			continue
 		}
 		fmt.Printf("Received geofence event: %+v\n", event)
+		// Simulate processing time change auto ack first
+		// time.Sleep(3 * time.Second)
+		// msg.Ack(false)
 	}
 
 	return nil

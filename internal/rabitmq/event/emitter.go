@@ -39,7 +39,7 @@ func (e *Emitter) Push(event models.GeoFenceEvent) error {
 	}
 	defer channel.Close()
 
-	routingKey := fmt.Sprintf("vehicle.%s.%s", event.VehicleID, event.Event)
+	routingKey := fmt.Sprintf("vehicle.%s.geofence_entry", event.VehicleID)
 
 	err = channel.Publish(
 		"fleet.events",
