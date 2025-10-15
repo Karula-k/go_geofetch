@@ -1,6 +1,6 @@
 # GO Boilerplate
 
-A minimal and extensible boilerplate project for building web applications in Go. It integrates essential tools and patterns for modern Go development including SQL database integration, hot reloading, and code generation.
+A MQTT and Rabbit MQ FIBER
 
 ## Features
 
@@ -8,6 +8,19 @@ A minimal and extensible boilerplate project for building web applications in Go
 - ⚡ **Fiber** — An Express-inspired web framework for Go.
 - 🧩 **sqlc** — Type-safe SQL query generator for Go.
 - 🔁 **Air** — Live reload for Go apps during development.
+- 🐇 **Rabbit MQ** — Broker.
+- 🦟 **MQTT** — Lightweight Broker.
+
+---
+
+## Postman
+
+ignore user route its used for project that use middleware, this project didnt use middleware yet
+
+```
+cd postman
+vim GeoFetch API.postman_collection.json
+```
 
 ---
 
@@ -28,39 +41,53 @@ A minimal and extensible boilerplate project for building web applications in Go
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/go-boilerplate.git
-cd go-boilerplate
+git clone https://github.com/Karula-k/go_geofetch
+cd go_geofetch
 ```
 
-2. **Prerequire**
+2. **Copy ENV**
 
 ```bash
-go install github.com/air-verse/air@latest
-go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+make new .env file using .env.example as reference
+```
+
+2. **Build**
+
+```bash
+docker-compose up --build
+docker-compose up -d
+```
+
+3. **Prerequire**
+   migrate the database
+
+```bash
+docker-compose exec api make migrateup
 ```
 
 3. **Run the project**
 
 ```bash
-make run
+docker-compose up
 ```
 
-## Goals
+3. **open**
 
-- [x] login
+```bash
+http://localhost:4000/swagger/
+```
 
-- [x] register
-
-- [x] Swagger
-
-- [ ] permission management
-
-- [x] env management
-
-# Reference
+### Running Mock
 
 ```
-https://github.com/Pungyeon/go-rabbitmq-example/blob/master/README.md
-
-https://medium.com/@abdurrehman-520/unlock-the-power-of-geofencing-in-flutter-with-haversine-formula-21b8203b1a5
+cd scripts
+go run .\mock.go
 ```
+
+---
+
+### Reference
+
+[rabbitMQ EDA](https://github.com/Pungyeon/go-rabbitmq-example/blob/master/README.md)
+
+[haversine Distance](https://medium.com/@abdurrehman-520/unlock-the-power-of-geofencing-in-flutter-with-haversine-formula-21b8203b1a5)
