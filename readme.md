@@ -57,7 +57,7 @@ make run
 
 - [x] env management
 
-# Refrence
+# Reference
 
 ```
 https://github.com/Pungyeon/go-rabbitmq-example/blob/master/README.md
