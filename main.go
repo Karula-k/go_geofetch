@@ -11,6 +11,8 @@ import (
 	_ "github.com/go_geofetch/docs"
 	"github.com/go_geofetch/internal/mqtt"
 	"github.com/go_geofetch/internal/mqtt/subscriptions"
+	"github.com/go_geofetch/internal/rabitmq"
+	"github.com/go_geofetch/internal/rabitmq/event"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -19,9 +21,9 @@ func startServer(app *fiber.App, port string) {
 	log.Fatal(app.Listen(port))
 }
 
-// @title			Order Api
+// @title			GeoFetch API
 // @version		1.0
-// @description	This is an Boilerplate for Backend
+// @description	This is an Geo Fetch and Geo Fencing for Backend
 // @termsOfService	http://swagger.io/terms/
 func main() {
 	ctx := context.Background()
@@ -40,8 +42,30 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer mqttClient.Disconnect(250)
 
-	subscriptions.MQTTSubscription(ctx, queries, &env, mqttClient)
+	// Initialize RabbitMQ
+	rabbitConn, err := rabitmq.InitRabbitMQ(&env)
+	if err != nil {
+		log.Fatal("Failed to connect to RabbitMQ:", err)
+	}
+	defer rabbitConn.Close()
+
+	// Start RabbitMQ consumer in goroutine
+	go func() {
+		consumer, err := event.NewConsumer(rabbitConn)
+		if err != nil {
+			log.Printf("Failed to create consumer: %v", err)
+			return
+		}
+
+		err = consumer.Listen()
+		if err != nil {
+			log.Printf("RabbitMQ consumer error: %v", err)
+		}
+	}()
+
+	go subscriptions.MQTTSubscription(ctx, queries, &env, mqttClient, rabbitConn)
 
 	fmt.Println(`
 	 $$$$$$\   $$$$$$\         $$$$$$\  $$$$$$$\ $$$$$$\ 
