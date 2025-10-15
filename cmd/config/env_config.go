@@ -16,6 +16,7 @@ func EnvConfig() (models.EnvModel, error) {
 	databaseUrl := os.Getenv("DATABASE_URL")
 	mqttBroker := os.Getenv("MQTT_BROKER")
 	mqttClientID := os.Getenv("MQTT_CLIENT_ID")
+	rabbitMQURL := os.Getenv("RABBITMQ_URL")
 
 	if databaseUrl == "" {
 		return models.EnvModel{}, errors.New("DATABASE_URL is not set")
@@ -41,6 +42,9 @@ func EnvConfig() (models.EnvModel, error) {
 	if mqttClientID == "" {
 		return models.EnvModel{}, errors.New("MQTT_CLIENT_ID is not set")
 	}
+	if rabbitMQURL == "" {
+		return models.EnvModel{}, errors.New("RABBITMQ_URL is not set")
+	}
 
 	model := models.EnvModel{
 		DatabaseUrl:      databaseUrl,
@@ -51,6 +55,7 @@ func EnvConfig() (models.EnvModel, error) {
 		PostgresUser:     postgresUser,
 		PostgresPassword: postgresPassword,
 		PostgresDB:       postgresDB,
+		RabbitMQURL:      rabbitMQURL,
 	}
 
 	return model, nil
